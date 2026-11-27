@@ -116,7 +116,7 @@ export function setupScrollInfrastructure(scope: HTMLElement): gsap.Context {
           yPercent: amount,
           ease: 'none',
           scrollTrigger: {
-            trigger: el.closest('section') ?? el,
+            trigger: el.closest('article, section') ?? el,
             start: 'top bottom',
             end: 'bottom top',
             scrub: true,

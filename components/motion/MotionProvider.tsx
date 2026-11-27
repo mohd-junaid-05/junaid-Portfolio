@@ -125,60 +125,92 @@ export function MotionProvider({ children }: { children: ReactNode }) {
     html.classList.add('js');
     html.setAttribute('data-motion', motionEnabled ? 'on' : 'off');
 
-    if (!motionEnabled) {
-      html.classList.remove('lenis', 'lenis-smooth');
-      revealAllImmediately(scope);
+    let cleanupRuntime: (() => void) | undefined;
+    let fallbackTimer: number | null = null;
+    let disposed = false;
 
-      const topbar = document.querySelector<HTMLElement>('.topbar');
-      const syncStuck = () => {
-        topbar?.classList.toggle('is-stuck', window.scrollY > 24);
+    const startRuntime = () => {
+      if (disposed) return;
+
+      if (!motionEnabled) {
+        html.classList.remove('lenis', 'lenis-smooth');
+        revealAllImmediately(scope);
+
+        const topbar = document.querySelector<HTMLElement>('.topbar');
+        const syncStuck = () => {
+          topbar?.classList.toggle('is-stuck', window.scrollY > 24);
+        };
+        syncStuck();
+        window.addEventListener('scroll', syncStuck, { passive: true });
+        cleanupRuntime = () => {
+          window.removeEventListener('scroll', syncStuck);
+        };
+        return;
+      }
+
+      ensureGsapPlugins();
+
+      const lenis = new Lenis(LENIS_OPTIONS);
+      lenisRef.current = lenis;
+
+      const unsubscribeLenis = lenis.on('scroll', ScrollTrigger.update);
+      const onTick = (timeSeconds: number) => {
+        lenis.raf(timeSeconds * 1000);
       };
-      syncStuck();
-      window.addEventListener('scroll', syncStuck, { passive: true });
-      return () => {
-        window.removeEventListener('scroll', syncStuck);
+
+      gsap.ticker.add(onTick);
+      gsap.ticker.lagSmoothing(0);
+
+      const ctx = setupScrollInfrastructure(scope);
+
+      let resizeTimer: number | null = null;
+      const resizeObserver = new ResizeObserver(() => {
+        if (resizeTimer !== null) window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 150);
+      });
+      resizeObserver.observe(document.body);
+
+      let fontsCancelled = false;
+      document.fonts?.ready.then(() => {
+        if (!fontsCancelled) ScrollTrigger.refresh();
+      });
+
+      cleanupRuntime = () => {
+        fontsCancelled = true;
+        if (resizeTimer !== null) window.clearTimeout(resizeTimer);
+        resizeObserver.disconnect();
+        ctx.revert();
+        gsap.ticker.remove(onTick);
+        gsap.ticker.lagSmoothing(500, 33);
+        unsubscribeLenis();
+        lenis.destroy();
+        lenisRef.current = null;
       };
-    }
-
-    ensureGsapPlugins();
-
-    const lenis = new Lenis(LENIS_OPTIONS);
-    lenisRef.current = lenis;
-
-    const unsubscribeLenis = lenis.on('scroll', ScrollTrigger.update);
-    const onTick = (timeSeconds: number) => {
-      lenis.raf(timeSeconds * 1000);
     };
 
-    gsap.ticker.add(onTick);
-    gsap.ticker.lagSmoothing(0);
+    const onHydrated = () => {
+      if (fallbackTimer !== null) {
+        window.clearTimeout(fallbackTimer);
+        fallbackTimer = null;
+      }
+      window.removeEventListener('mj:hydrated', onHydrated);
+      startRuntime();
+    };
 
-    const ctx = setupScrollInfrastructure(scope);
-
-    let resizeTimer: number | null = null;
-    const resizeObserver = new ResizeObserver(() => {
-      if (resizeTimer !== null) window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 150);
-    });
-    resizeObserver.observe(document.body);
-
-    let fontsCancelled = false;
-    document.fonts?.ready.then(() => {
-      if (!fontsCancelled) ScrollTrigger.refresh();
-    });
+    if (window.__mjHydrated) {
+      startRuntime();
+    } else {
+      window.addEventListener('mj:hydrated', onHydrated, { once: true });
+      fallbackTimer = window.setTimeout(onHydrated, 1200);
+    }
 
     return () => {
-      fontsCancelled = true;
-      if (resizeTimer !== null) window.clearTimeout(resizeTimer);
-      resizeObserver.disconnect();
-      ctx.revert();
-      gsap.ticker.remove(onTick);
-      gsap.ticker.lagSmoothing(500, 33);
-      unsubscribeLenis();
-      lenis.destroy();
-      lenisRef.current = null;
+      disposed = true;
+      if (fallbackTimer !== null) window.clearTimeout(fallbackTimer);
+      window.removeEventListener('mj:hydrated', onHydrated);
+      cleanupRuntime?.();
     };
   }, [motionEnabled]);
 

@@ -1,52 +1,43 @@
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
-import { ContentStatus } from '@/components/ui/ContentStatus';
+import { ProjectCard } from '@/components/ui/ProjectCard';
+import { ProjectShelf } from '@/components/ui/ProjectShelf';
 import { portfolioContent } from '@/data/portfolio';
 
+/**
+ * Chapter 02 — Selected Work (`#work`).
+ *
+ * Renders the manga-panel project showcase on a `--paper-2` surface:
+ * - 12-column asymmetric slanted `clip-path` grid (`.panels` / `.panel` / `.pcard`)
+ *   collapsing to a clean 1-column stack below `900px`
+ * - `ALSO ON THE SHELF` 3D book-spine shelf (`ProjectShelf`)
+ *
+ * Project content is driven entirely by `portfolioContent.projects`.
+ */
 export function WorkShell() {
   const { projects } = portfolioContent;
+  const featured = projects.filter((p) => p.featured);
 
   return (
-    <section id="work" aria-labelledby="work-title" className="chapter on-paper-2">
+    <section id="work" aria-labelledby="work-title" className="chapter work on-paper-2">
       <ChapterHeader
         number="02"
         kanji="第二章"
         chapterName="Selected Work"
         titlePrefix="Selected"
         titleAccent="Work"
-        intro="Core portfolio projects from the candidate inventory. Descriptions, technology stacks, and live links remain explicitly marked TBD until owner verification."
+        intro="Core projects from the portfolio. Descriptions, stacks, and links remain explicitly marked TBD until owner verification."
         titleId="work-title"
       />
 
-      <ol className="m-0 grid list-none gap-4 p-0 md:grid-cols-2">
-        {projects.map((project) => (
-          <li
-            key={project.slug}
-            className="flex flex-col justify-between border-[3px] border-ink bg-paper p-5"
-          >
-            <div>
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b-2 border-ink pb-3">
-                <span className="label text-mute">Project {project.index}</span>
-                <ContentStatus status={project.summary.status} />
-              </div>
-              <h3 className="display m-0 text-[clamp(2.2rem,4.8vw,4.2rem)] leading-[0.95]">
-                {project.name}
-              </h3>
-              <p className="mt-3 text-[1rem] leading-[1.45]">
-                {project.summary.value ?? project.summary.note ?? 'Description TBD'}
-              </p>
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-ink/40 pt-3">
-              <span className="label text-mute">
-                {project.stack.length > 0 ? project.stack.join(' · ') : 'Stack: TBD'}
-              </span>
-              <span className="label">
-                {project.repoUrl.value || project.demoUrl.value ? 'Links verified' : 'Links: TBD'}
-              </span>
-            </div>
+      <ol className="panels">
+        {featured.map((project) => (
+          <li key={project.slug} className="panel">
+            <ProjectCard project={project} />
           </li>
         ))}
       </ol>
+
+      <ProjectShelf projects={projects} />
     </section>
   );
 }

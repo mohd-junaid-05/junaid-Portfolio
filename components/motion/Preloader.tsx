@@ -67,24 +67,29 @@ export function Preloader() {
 
   useEffect(() => {
     const html = document.documentElement;
-    let seen = false;
-    try {
-      seen = window.sessionStorage.getItem(SEEN_STORAGE_KEY) === '1';
-    } catch {
-      seen = false;
-    }
-
-    const shouldRun = motionEnabled && !seen && html.hasAttribute('data-loading');
-    if (!shouldRun) {
-      clearLoadingStateImmediately();
-      return;
-    }
-
     let cancelled = false;
     let settled = false;
     let failsafeTimer: number | null = null;
+    let hydrationTimer: number | null = null;
+    let ctx: gsap.Context | null = null;
 
-    const ctx = gsap.context(() => {
+    const startPreloader = () => {
+      if (cancelled) return;
+
+      let seen = false;
+      try {
+        seen = window.sessionStorage.getItem(SEEN_STORAGE_KEY) === '1';
+      } catch {
+        seen = false;
+      }
+
+      const shouldRun = motionEnabled && !seen && html.hasAttribute('data-loading');
+      if (!shouldRun) {
+        clearLoadingStateImmediately();
+        return;
+      }
+
+      ctx = gsap.context(() => {
       const loader = document.querySelector<HTMLElement>('.loader');
       const numEl = document.querySelector<HTMLElement>('.loader__num');
       const maskEl = document.querySelector<HTMLElement>('.hero__inkmask');
@@ -284,13 +289,34 @@ export function Preloader() {
       return () => {
         window.removeEventListener('keydown', onKeyDown);
       };
-    });
+      });
+    };
+
+    const onHydrated = () => {
+      if (hydrationTimer !== null) {
+        window.clearTimeout(hydrationTimer);
+        hydrationTimer = null;
+      }
+      window.removeEventListener('mj:hydrated', onHydrated);
+      startPreloader();
+    };
+
+    if (window.__mjHydrated) {
+      startPreloader();
+    } else {
+      window.addEventListener('mj:hydrated', onHydrated, { once: true });
+      hydrationTimer = window.setTimeout(onHydrated, 1200);
+    }
 
     return () => {
       cancelled = true;
+      if (hydrationTimer !== null) window.clearTimeout(hydrationTimer);
+      window.removeEventListener('mj:hydrated', onHydrated);
       if (failsafeTimer !== null) window.clearTimeout(failsafeTimer);
-      ctx.revert();
-      clearLoadingStateImmediately();
+      ctx?.revert();
+      if (window.__mjHydrated) {
+        clearLoadingStateImmediately();
+      }
     };
   }, [motionEnabled]);
 

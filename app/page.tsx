@@ -1,3 +1,4 @@
+import { HydrationMarker } from '@/components/motion/HydrationMarker';
 import { CapabilitiesShell } from '@/components/sections/CapabilitiesShell';
 import { ContactShell } from '@/components/sections/ContactShell';
 import { ExperienceShell } from '@/components/sections/ExperienceShell';
@@ -21,12 +22,18 @@ export default function HomePage() {
         trackB={openingTapes.trackB}
       />
       <WorkShell />
+      <TapesDivider
+        variant="ink-accent"
+        trackA={openingTapes.trackA}
+        trackB={openingTapes.trackB}
+      />
       <StackShell />
       <StoryShell />
       <ExperienceShell />
       <ReceiptsShell />
       <CapabilitiesShell />
       <ContactShell />
+      <HydrationMarker />
     </>
   );
 }
