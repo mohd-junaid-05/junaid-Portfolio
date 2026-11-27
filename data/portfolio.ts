@@ -23,10 +23,11 @@ export const portfolioContent: PortfolioContent = {
       note: 'Confirm preferred public headline.',
     },
     lede: {
-      value: 'Building software systems across web, core programming, and AI.',
+      value: 'Building web software,',
       status: 'candidate',
       note: 'Refine personal editorial lede on owner review.',
     },
+    ledeEmphasis: 'core systems, and AI.',
     now: {
       value: 'B.Tech CSE · SCET Hyderabad & NEXUS Coding Club',
       status: 'candidate',
@@ -43,6 +44,24 @@ export const portfolioContent: PortfolioContent = {
       note: 'TBD — confirm internship / collaboration / project availability.',
     },
     location: 'Hyderabad, India',
+  },
+  openingTapes: {
+    trackA: [
+      'Next.js',
+      'TypeScript',
+      'Python',
+      'C',
+      'React',
+      'Git & GitHub',
+      'Google Cloud',
+      'HTML / CSS',
+    ],
+    trackB: [
+      'Mohd Junaid',
+      'B.Tech CSE',
+      'SCET Hyderabad',
+      'NEXUS Coding Club',
+    ],
   },
   projects: [
     {

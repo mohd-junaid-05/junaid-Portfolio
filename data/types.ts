@@ -115,6 +115,7 @@ export interface PortfolioContent {
     handle: VerifiableValue<string>;
     eyebrow: VerifiableValue<string>;
     lede: VerifiableValue<string>;
+    ledeEmphasis?: string;
     now: VerifiableValue<string>;
     stackSummary: VerifiableValue<string>;
     availability: VerifiableValue<string>;
@@ -123,6 +124,10 @@ export interface PortfolioContent {
   projects: ProjectItem[];
   skillLayers: SkillLayer[];
   statementText: string[];
+  openingTapes: {
+    trackA: string[];
+    trackB: string[];
+  };
   storyPanels: StoryPanelItem[];
   offThePage: PolaroidPlaceholder[];
   experiences: ExperienceItem[];

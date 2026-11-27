@@ -94,6 +94,20 @@
     scroll-padding-top: var(--bar-h);
   }
 
+  html.theme-shift,
+  html.theme-shift * {
+    transition:
+      background-color 0.4s,
+      color 0.4s,
+      border-color 0.4s,
+      fill 0.4s,
+      stroke 0.4s !important;
+  }
+
+  html[data-loading] body {
+    overflow: hidden;
+  }
+
   html.lenis,
   html.lenis body {
     height: auto;
@@ -169,7 +183,8 @@
   -webkit-text-stroke-color: var(--paper);
 }
 
-.on-ink :focus-visible {
+.on-ink :focus-visible,
+.menu :focus-visible {
   outline-color: var(--accent-hi);
 }
 
@@ -220,6 +235,27 @@ em.serif {
   -webkit-text-stroke: max(1.5px, 0.012em) var(--ink);
 }
 
+/* Halftone dot utility & global paper grain */
+.tone {
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    currentColor 0 36%,
+    transparent 38%
+  );
+  background-size: var(--dot, 9px) var(--dot, 9px);
+  pointer-events: none;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.36;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .07 0 0 0 0 .07 0 0 0 0 .07 0 0 0 .9 -.28'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
 /* Shared primitives */
 .skip-link {
   position: fixed;
@@ -258,7 +294,10 @@ em.serif {
   text-decoration: none;
   cursor: pointer;
   clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
-  transition: background-color var(--f6) var(--ease-slam), color var(--f6) var(--ease-slam);
+  transition:
+    background-color var(--f6) var(--ease-slam),
+    color var(--f6) var(--ease-slam),
+    transform var(--f6) var(--ease-slam);
 }
 
 .btn:hover {
@@ -336,6 +375,11 @@ em.serif {
   color: var(--ink);
 }
 
+.on-ink .tag--accent {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
 .on-ink .tag--line {
   background: transparent;
   color: var(--paper);
@@ -357,7 +401,71 @@ em.serif {
   text-decoration-color: var(--accent-hi);
 }
 
-/* Fixed header shell (zero-JS baseline) */
+/* Preloader overlay */
+@keyframes dots {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75%,
+  100% {
+    content: "...";
+  }
+}
+
+.loader {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 95;
+  height: 9rem;
+  color: var(--ink);
+  pointer-events: none;
+  display: none;
+}
+
+html[data-loading] .loader {
+  display: block;
+}
+
+html[data-loading] .topbar,
+html[data-loading] .rail,
+html[data-loading] .tapes,
+html[data-loading] .hero__canvas,
+html[data-loading] .hero__tone {
+  visibility: hidden;
+}
+
+.loader__note {
+  position: absolute;
+  left: var(--gut);
+  bottom: 1.75rem;
+  margin: 0;
+}
+
+.loader__note::after {
+  content: "";
+  display: inline-block;
+  width: 1.4em;
+  text-align: left;
+  animation: 0.9s steps(4, jump-none) 0s infinite normal none running dots;
+}
+
+.loader__count {
+  position: absolute;
+  right: var(--gut);
+  bottom: 1rem;
+  margin: 0;
+  font-size: clamp(3.5rem, 11vw, 9.5rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fixed header */
 .topbar {
   position: fixed;
   inset: 0 0 auto;
@@ -370,7 +478,9 @@ em.serif {
   background: var(--paper);
   color: var(--ink);
   border-bottom: var(--rule) solid var(--ink);
-  transition: background-color var(--f6) ease, border-color var(--f6) ease;
+  transition:
+    background-color var(--f6) ease,
+    border-color var(--f6) ease;
 }
 
 html.js .topbar {
@@ -387,6 +497,49 @@ html.js .topbar.is-stuck {
   display: none;
   align-items: center;
   gap: 1.25rem;
+}
+
+.theme-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.theme-dot {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.theme-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0.34rem;
+  border-radius: 50%;
+  background: var(--dot);
+  transition: transform var(--f6) var(--ease-slam);
+}
+
+.theme-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0.1rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px;
+  opacity: 0;
+  transition: opacity var(--f6) ease;
+}
+
+.theme-dot:hover::before {
+  transform: scale(1.25);
+}
+
+.theme-dot[aria-pressed='true']::after {
+  opacity: 1;
 }
 
 @keyframes blink {
@@ -418,6 +571,7 @@ html.js .topbar.is-stuck {
 }
 
 .on-ink .motion-toggle__dot,
+.menu .motion-toggle__dot,
 .mobile-nav__panel .motion-toggle__dot {
   background: var(--accent-hi);
 }
@@ -503,9 +657,39 @@ html.js .topbar.is-stuck {
   transform: scaleX(1);
 }
 
-/* Native HTML <details> jump menu so mobile navigation works with zero JS */
+.menu-btn {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0 0.25rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: 600 0.75rem var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-btn__bars {
+  display: inline-block;
+  width: 1.4rem;
+  height: 0.55rem;
+  border-block: 2px solid;
+}
+
+html.js .menu-btn {
+  display: inline-flex;
+}
+
+/* Native HTML <details> mobile drawer kept active ONLY when JS is disabled */
 .mobile-nav {
   position: relative;
+}
+
+html.js .mobile-nav {
+  display: none;
 }
 
 .mobile-nav__summary {
@@ -547,21 +731,645 @@ html.js .topbar.is-stuck {
     display: inline-flex;
   }
 
+  html.js .menu-btn,
   .mobile-nav {
     display: none;
   }
 }
 
-/* Chapter shell layout */
-.hero-shell {
+/* Full-screen interactive mobile <dialog class="menu"> */
+@keyframes menu-in {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+.menu {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: auto;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.menu::backdrop {
+  background: var(--ink);
+}
+
+.menu[open] {
+  animation: menu-in 0.45s var(--ease-cut);
+}
+
+.menu__inner {
+  min-height: 100%;
+  padding: 0 var(--gut) 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu__top {
+  height: var(--bar-h);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu__close {
+  min-height: 2.75rem;
+  padding: 0 0.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--paper);
+  font: 600 0.75rem var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu__list {
+  margin: auto 0;
+  padding: 1rem 0;
+  list-style: none;
+}
+
+.menu__link {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr auto;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--paper);
+  text-decoration: none;
+}
+
+.menu__no {
+  font: 600 0.75rem var(--font-mono);
+  letter-spacing: 0.1em;
+  color: var(--accent-hi);
+}
+
+.menu__label {
+  font: 400 clamp(2.1rem, 9.5vw, 4rem) / 1.02 var(--font-display);
+  text-transform: uppercase;
+}
+
+.menu__jp {
+  font-family: var(--font-jp);
+  font-weight: 800;
+  font-size: 0.9rem;
+  opacity: 0.55;
+}
+
+.menu__link:hover .menu__label,
+.menu__link:focus-visible .menu__label {
+  color: var(--accent-hi);
+}
+
+.menu__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+
+/* Fixed left chapter rail (>= 1024px) */
+@keyframes rail-in {
+  0% {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.rail {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .rail {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 65;
+    width: 4px;
+    display: block;
+    pointer-events: none;
+  }
+
+  .rail__bar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transform-origin: center top;
+    transform: scaleY(0);
+  }
+}
+
+.rail__chapter {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0.95rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font: 600 0.6875rem var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgb(255, 255, 255);
+  mix-blend-mode: difference;
+  opacity: 0;
+}
+
+.rail__chapter.is-shown {
+  animation: 0.3s steps(4) 0s 1 normal both running rail-in;
+}
+
+/* Custom pointer cursor & ink brush trail (hover: hover desktop only) */
+.ink-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 85;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.cursor.is-on {
+  opacity: 1;
+}
+
+.cursor::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition:
+    transform var(--f6) var(--ease-slam),
+    background-color var(--f6) ease,
+    box-shadow var(--f6) ease;
+}
+
+.cursor.is-link::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 0.6px var(--accent);
+  transform: scale(3.4);
+}
+
+.cursor.is-label::before {
+  transform: scale(7.6);
+}
+
+.cursor__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font: 800 0.6875rem var(--font-sans);
+  font-stretch: 112%;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--on-accent);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform var(--f6) var(--ease-slam);
+}
+
+.cursor.is-label .cursor__label {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor,
+  .ink-trail {
+    display: none;
+  }
+}
+
+/* Chapter 01 — Opening Hero */
+.hero {
+  position: relative;
   isolation: isolate;
   min-height: 100svh;
   padding: calc(var(--bar-h) + 1.5rem) var(--gut) clamp(4.5rem, 10svh, 7.5rem);
   display: grid;
-  align-content: end;
-  gap: 2rem;
+  grid-template-rows: 1fr auto;
+  overflow: clip;
 }
 
+html[data-loading] .hero [data-intro] {
+  visibility: hidden;
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero__tone {
+  position: absolute;
+  top: -10svh;
+  right: -8vw;
+  z-index: -3;
+  width: 62vw;
+  height: 80svh;
+  opacity: 0.2;
+  transform: rotate(-8deg);
+  mask-image: linear-gradient(100deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 70%);
+}
+
+.hero:has(.hero__canvas[data-ready="true"]) .hero__tone {
+  display: none;
+}
+
+.hero__art {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  width: min(60vw, 70rem);
+  height: 76%;
+  will-change: transform;
+  pointer-events: none;
+  mask-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 12%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0) 20%, rgb(0, 0, 0) 40%);
+  mask-composite: intersect;
+}
+
+.living {
+  position: absolute;
+  inset: 0;
+}
+
+.living__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+.hero__stage {
+  position: relative;
+  align-self: end;
+}
+
+.hero__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.75rem;
+  margin-bottom: clamp(0.6rem, 1.3vw, 1rem);
+}
+
+.hero__mark {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0;
+  line-height: 1;
+}
+
+.hero__mark .jp {
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  letter-spacing: 0.1em;
+}
+
+.hero__mark .label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  color: var(--mute);
+}
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0;
+  color: var(--accent);
+}
+
+.hero__eyebrow-rule {
+  flex: 0 0 auto;
+  width: clamp(1.5rem, 3.4vw, 3rem);
+  height: 2px;
+  background: currentColor;
+}
+
+.hero__title {
+  position: relative;
+  min-width: 0;
+}
+
+.hero__slash {
+  position: absolute;
+  top: 22%;
+  left: calc(-1 * var(--gut) - 10vw);
+  z-index: -2;
+  width: 130vw;
+  height: 76%;
+  fill: var(--accent);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hero__name {
+  margin: 0;
+  font-size: min(var(--fs-hero), 29svh);
+  line-height: 0.9;
+}
+
+.hero__line {
+  display: block;
+}
+
+.hero__line--b {
+  margin-left: clamp(0rem, 7vw, 8rem);
+}
+
+.hero__word {
+  display: inline-block;
+  font-kerning: none;
+}
+
+.hero__ch {
+  display: inline-block;
+  will-change: transform;
+  transform: perspective(700px);
+}
+
+.hero__inkmask {
+  display: none;
+}
+
+html[data-loading] .hero__inkmask {
+  position: absolute;
+  inset: -1.5rem -1.5rem 50%;
+  z-index: 2;
+  display: block;
+  padding: 1.5rem 1.5rem 0;
+  overflow: hidden;
+  background: var(--paper);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.hero__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  max-width: min(50vw, 48rem);
+  padding-top: clamp(1rem, 3svh, 2rem);
+}
+
+.hero__pitch {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.hero__lede {
+  max-width: 17ch;
+  margin: 0;
+  font-size: var(--fs-lede);
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero__meta {
+  margin: 0;
+  font: 400 0.8125rem/1.75 var(--font-mono);
+}
+
+.hero__meta > div {
+  display: grid;
+  grid-template-columns: 4.2rem 1fr;
+  gap: 0.5rem;
+}
+
+.hero__meta dt {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.hero__meta dd {
+  margin: 0;
+}
+
+.hero__live {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: 1.2s steps(2, jump-none) 0s infinite normal none running blink;
+}
+
+@media (max-width: 1100px) {
+  .hero__foot {
+    grid-template-columns: 1fr;
+    max-width: min(60vw, 34rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding-bottom: 5.5rem;
+  }
+
+  .hero__art {
+    top: var(--bar-h);
+    bottom: auto;
+    width: 84vw;
+    height: 30svh;
+    mask-image:
+      linear-gradient(rgb(0, 0, 0) 55%, rgba(0, 0, 0, 0) 96%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 50%);
+    mask-composite: intersect;
+  }
+
+  .hero__name {
+    font-size: var(--fs-hero);
+  }
+
+  .hero__top {
+    padding-right: 9.5rem;
+  }
+
+  .hero__eyebrow {
+    gap: 0.6rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+  }
+
+  .hero__slash {
+    top: 30%;
+    left: calc(-1 * var(--gut) - 30vw);
+    width: 170vw;
+    height: 66%;
+  }
+
+  .hero__line--b {
+    margin-left: 0;
+  }
+
+  .hero__foot {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: none;
+    padding-top: 1.5rem;
+  }
+
+  .hero__lede {
+    max-width: 14ch;
+    font-size: 1.85rem;
+  }
+
+  .hero__cta .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (max-height: 640px) and (min-width: 768px) {
+  .hero__lede {
+    font-size: 1.5rem;
+  }
+}
+
+/* Marquee Tapes Seam */
+@keyframes tape {
+  100% {
+    transform: translate(-50%);
+  }
+}
+
+.tapes {
+  position: relative;
+  z-index: 5;
+  height: clamp(7.5rem, 15vw, 12.5rem);
+  margin-block: clamp(-6.25rem, -7.5vw, -3.75rem);
+  overflow-x: clip;
+  pointer-events: none;
+}
+
+.tape {
+  position: absolute;
+  left: -6vw;
+  width: 112vw;
+  padding: 0.5em 0 0.42em;
+  font-size: clamp(1.35rem, 3.1vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tape--a {
+  top: 24%;
+  background: var(--ink);
+  color: var(--paper);
+  transform: rotate(-2.4deg);
+}
+
+.tape--b {
+  top: 40%;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow:
+    inset 0 2px 0 var(--ink),
+    inset 0 -2px 0 var(--ink);
+  transform: rotate(2deg);
+}
+
+.tapes--ink-accent .tape--b {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: none;
+}
+
+.tapes--paper-ink .tape--a {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.tapes--paper-ink .tape--b {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: none;
+}
+
+.tape__shift {
+  will-change: transform;
+}
+
+.tape__track {
+  display: inline-flex;
+  will-change: transform;
+  animation: 46s linear 0s infinite normal none running tape;
+}
+
+.tape--b .tape__track {
+  animation-duration: 58s;
+  animation-direction: reverse;
+}
+
+.tape__run {
+  display: inline-flex;
+}
+
+.tape__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.tape__star {
+  margin: 0 0.75em;
+  font-size: 0.6em;
+  transform: translateY(-0.06em);
+}
+
+/* Chapter shell layout */
 .chapter {
   position: relative;
   isolation: isolate;
@@ -661,24 +1469,60 @@ html[data-motion='off'] ::after {
   animation-iteration-count: 1 !important;
 }
 
-html[data-motion='off'] [data-reveal] {
+html[data-motion='off'] .tape__track {
+  animation: none !important;
+}
+
+html[data-motion='off'] .cursor,
+html[data-motion='off'] .ink-trail {
+  display: none !important;
+}
+
+html[data-motion='off'] .loader {
+  display: none !important;
+}
+
+html[data-motion='off'] .topbar,
+html[data-motion='off'] .rail,
+html[data-motion='off'] .tapes,
+html[data-motion='off'] .hero__canvas,
+html[data-motion='off'] .hero__tone,
+html[data-motion='off'] .hero [data-intro] {
+  visibility: visible !important;
+}
+
+html[data-motion='off'] .hero__inkmask {
+  display: none !important;
+}
+
+html[data-motion='off'] [data-reveal],
+html[data-motion='off'] .hero [data-intro],
+html[data-motion='off'] .hero__ch,
+html[data-motion='off'] .hero__slash g {
   opacity: 1 !important;
   clip-path: none !important;
   transform: none !important;
 }
 
-/* Reduced-motion baseline (required accessibility fix over reference) */
+/* Reduced-motion baseline when JS is absent (when JS is active, BootstrapScript/MotionProvider sets data-motion="off" unless user explicitly overrides) */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html:not(.js) *,
+  html:not(.js) *::before,
+  html:not(.js) *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
   }
 
-  [data-reveal] {
+  html:not(.js) .tape__track {
+    animation: none !important;
+  }
+
+  html:not(.js) [data-reveal],
+  html:not(.js) .hero [data-intro],
+  html:not(.js) .hero__ch,
+  html:not(.js) .hero__slash g {
     opacity: 1 !important;
     clip-path: none !important;
     transform: none !important;

@@ -42,6 +42,68 @@ export function setupScrollInfrastructure(scope: HTMLElement): gsap.Context {
       },
     });
 
+    // Opening hero subtle depth & slash scrub verified against reference (`E-039`, Phase 05 probe)
+    const heroSection = scope.querySelector<HTMLElement>('#opening');
+    const heroArt = heroSection?.querySelector<HTMLElement>('.hero__art');
+    const heroSlash = heroSection?.querySelector<SVGSVGElement>('.hero__slash');
+
+    if (heroSection && heroArt) {
+      gsap.fromTo(
+        heroArt,
+        { scale: 1, y: 0 },
+        {
+          scale: 1.1,
+          y: 28,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroSection,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    }
+
+    if (heroSection && heroSlash) {
+      gsap.fromTo(
+        heroSlash,
+        { rotation: 0, y: 0 },
+        {
+          rotation: -3,
+          y: 120,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroSection,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    }
+
+    // Marquee tape horizontal shift scrub across seam boundaries
+    const tapeShifts = gsap.utils.toArray<HTMLElement>('[data-tape-shift]', scope);
+    for (const shiftEl of tapeShifts) {
+      const dir = Number(shiftEl.dataset.tapeShift ?? '1') || 1;
+      const container = shiftEl.closest('.tapes') ?? shiftEl;
+      gsap.fromTo(
+        shiftEl,
+        { xPercent: -4.5 * dir },
+        {
+          xPercent: 4.5 * dir,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    }
+
     const parallaxTargets = gsap.utils.toArray<HTMLElement>('[data-parallax]', scope);
     for (const el of parallaxTargets) {
       const amount = Number(el.dataset.parallax ?? '0');

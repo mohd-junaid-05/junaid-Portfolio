@@ -6,9 +6,14 @@ import {
   JetBrains_Mono,
   Shippori_Mincho,
 } from 'next/font/google';
-import { MotionProvider } from '@/components/motion/MotionProvider';
+import { BootstrapScript } from '@/components/layout/BootstrapScript';
+import { ChapterRail } from '@/components/layout/ChapterRail';
+import { CursorFx } from '@/components/layout/CursorFx';
+import { GrainOverlay } from '@/components/layout/GrainOverlay';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { SiteHeader } from '@/components/layout/SiteHeader';
+import { MotionProvider } from '@/components/motion/MotionProvider';
+import { Preloader } from '@/components/motion/Preloader';
 import './globals.css';
 
 const anton = Anton({
@@ -64,14 +69,27 @@ const fontVariables = [
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" data-theme="blood" data-motion="on" className={fontVariables}>
+    <html
+      lang="en"
+      data-theme="blood"
+      data-motion="on"
+      className={fontVariables}
+      suppressHydrationWarning
+    >
+      <head>
+        <BootstrapScript />
+      </head>
       <body>
         <MotionProvider>
           <a href="#main" className="skip-link">
             Skip to content
           </a>
           <SiteHeader />
+          <GrainOverlay />
+          <CursorFx />
+          <ChapterRail />
           <main id="main" tabIndex={-1}>
+            <Preloader />
             {children}
           </main>
           <SiteFooter />

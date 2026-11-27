@@ -122,16 +122,25 @@ export function MotionProvider({ children }: { children: ReactNode }) {
     const html = document.documentElement;
     const scope = rootRef.current ?? document.body;
 
+    html.classList.add('js');
     html.setAttribute('data-motion', motionEnabled ? 'on' : 'off');
 
     if (!motionEnabled) {
-      html.classList.remove('js', 'lenis', 'lenis-smooth');
+      html.classList.remove('lenis', 'lenis-smooth');
       revealAllImmediately(scope);
-      return;
+
+      const topbar = document.querySelector<HTMLElement>('.topbar');
+      const syncStuck = () => {
+        topbar?.classList.toggle('is-stuck', window.scrollY > 24);
+      };
+      syncStuck();
+      window.addEventListener('scroll', syncStuck, { passive: true });
+      return () => {
+        window.removeEventListener('scroll', syncStuck);
+      };
     }
 
     ensureGsapPlugins();
-    html.classList.add('js');
 
     const lenis = new Lenis(LENIS_OPTIONS);
     lenisRef.current = lenis;
@@ -170,7 +179,6 @@ export function MotionProvider({ children }: { children: ReactNode }) {
       unsubscribeLenis();
       lenis.destroy();
       lenisRef.current = null;
-      html.classList.remove('js');
     };
   }, [motionEnabled]);
 
