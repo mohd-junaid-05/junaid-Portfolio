@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 800" fill="none">
+  <rect width="2100" height="800" fill="#ffffff" />
+
+  <!-- Outer manga speed-wedge framing -->
+  <path d="M0 0L680 270L0 185V0Z" fill="#0a0a0a" />
+  <path d="M2100 0L1420 270L2100 185V0Z" fill="#0a0a0a" />
+  <path d="M0 800L620 530L0 615V800Z" fill="#0a0a0a" />
+  <path d="M2100 800L1480 530L2100 615V800Z" fill="#0a0a0a" />
+
+  <!-- Dynamic brow & shadow mask -->
+  <path d="M240 200L840 310L1050 250L1260 310L1860 200L1740 295L1250 365L1050 325L850 365L360 295Z" fill="#0a0a0a" />
+  <path d="M975 340L1050 610L1125 340L1050 375Z" fill="#0a0a0a" />
+  <path d="M620 540L1050 760L1480 540L1320 650L1050 800L780 650Z" fill="#0a0a0a" />
+
+  <!-- Left eye frame & geometric iris -->
+  <path d="M430 370L880 350L835 470L500 475Z" fill="#ffffff" stroke="#0a0a0a" stroke-width="18" stroke-linejoin="miter" />
+  <path d="M410 355L895 335L875 365L425 385Z" fill="#0a0a0a" />
+  <circle cx="670" cy="412" r="56" fill="#0a0a0a" />
+  <circle cx="670" cy="412" r="34" fill="#ffffff" />
+  <circle cx="670" cy="412" r="18" fill="#0a0a0a" />
+  <circle cx="688" cy="394" r="9" fill="#ffffff" />
+  <path d="M670 356V376M670 448V468M614 412H634M706 412H726" stroke="#0a0a0a" stroke-width="4" />
+
+  <!-- Right eye frame & geometric iris -->
+  <path d="M1670 370L1220 350L1265 470L1600 475Z" fill="#ffffff" stroke="#0a0a0a" stroke-width="18" stroke-linejoin="miter" />
+  <path d="M1690 355L1205 335L1225 365L1675 385Z" fill="#0a0a0a" />
+  <circle cx="1430" cy="412" r="56" fill="#0a0a0a" />
+  <circle cx="1430" cy="412" r="34" fill="#ffffff" />
+  <circle cx="1430" cy="412" r="18" fill="#0a0a0a" />
+  <circle cx="1448" cy="394" r="9" fill="#ffffff" />
+  <path d="M1430 356V376M1430 448V468M1374 412H1394M1466 412H1486" stroke="#0a0a0a" stroke-width="4" />
+
+  <!-- Ink hatching & slash accents -->
+  <path d="M160 390L390 380M140 435L410 420M180 480L450 465" stroke="#0a0a0a" stroke-width="6" />
+  <path d="M1940 390L1710 380M1960 435L1690 420M1920 480L1650 465" stroke="#0a0a0a" stroke-width="6" />
+  <path d="M895 140L1020 265M1205 140L1080 265M1050 85V220" stroke="#0a0a0a" stroke-width="10" />
+  <path d="M740 165L900 285M1360 165L1200 285" stroke="#0a0a0a" stroke-width="5" />
+</svg>

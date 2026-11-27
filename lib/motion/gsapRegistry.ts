@@ -125,9 +125,109 @@ export function setupScrollInfrastructure(scope: HTMLElement): gsap.Context {
       );
     }
 
+    // Scroll-zoom for framed statement artwork
+    const zoomTargets = gsap.utils.toArray<HTMLElement>('[data-zoom]', scope);
+    for (const el of zoomTargets) {
+      const scaleTo = Number(el.dataset.zoom ?? '1.16');
+      if (!Number.isFinite(scaleTo) || scaleTo === 1) continue;
+
+      gsap.fromTo(
+        el,
+        { scale: 1 },
+        {
+          scale: scaleTo,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el.closest('.statement, section') ?? el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    }
+
+    // Horizontal scrub for statement display banner
+    const scrubXTargets = gsap.utils.toArray<HTMLElement>('[data-scrub-x]', scope);
+    for (const el of scrubXTargets) {
+      const endX = Number(el.dataset.scrubX ?? '-52');
+      if (!Number.isFinite(endX)) continue;
+
+      gsap.fromTo(
+        el,
+        { xPercent: 6 },
+        {
+          xPercent: endX,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el.closest('.statement, section') ?? el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    }
+
+    // Sequential ink-wash fill scrub across statement spans
+    const inkFillTargets = gsap.utils.toArray<HTMLElement>('[data-inkfill="true"]', scope);
+    const inkFillSpans: HTMLElement[] = [];
+    for (const el of inkFillTargets) {
+      const spans = Array.from(el.querySelectorAll<HTMLElement>(':scope > span'));
+      if (spans.length === 0) continue;
+      inkFillSpans.push(...spans);
+
+      ScrollTrigger.create({
+        trigger: el.closest('.statement, section') ?? el,
+        start: 'top 78%',
+        end: 'bottom 28%',
+        scrub: true,
+        onUpdate: (st) => {
+          const total = spans.length;
+          const scaled = st.progress * total;
+          for (let i = 0; i < total; i += 1) {
+            const local = Math.min(1, Math.max(0, scaled - i));
+            spans[i].style.setProperty('--f', local.toFixed(3));
+          }
+        },
+      });
+    }
+
     const revealTargets = gsap.utils.toArray<HTMLElement>('[data-reveal]', scope);
-    if (revealTargets.length > 0) {
-      ScrollTrigger.batch(revealTargets, {
+    const clipTargets = revealTargets.filter(
+      (el) => el.dataset.reveal === 'slit' || el.dataset.reveal === 'clip'
+    );
+    const fadeUpTargets = revealTargets.filter(
+      (el) => el.dataset.reveal !== 'slit' && el.dataset.reveal !== 'clip'
+    );
+
+    for (const el of clipTargets) {
+      const fromClip =
+        el.dataset.reveal === 'slit'
+          ? 'inset(50% 0%)'
+          : 'inset(0% 100% 0% 0%)';
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 88%',
+        once: true,
+        onEnter: () => {
+          el.classList.add('is-in');
+          gsap.fromTo(
+            el,
+            { clipPath: fromClip },
+            {
+              clipPath: 'inset(0% 0%)',
+              duration: MOTION_TOKENS.f12,
+              ease: MOTION_TOKENS.easeCut,
+              clearProps: 'clipPath',
+            }
+          );
+        },
+      });
+    }
+
+    if (fadeUpTargets.length > 0) {
+      ScrollTrigger.batch(fadeUpTargets, {
         start: 'top 88%',
         once: true,
         onEnter: (batch) => {
@@ -155,6 +255,9 @@ export function setupScrollInfrastructure(scope: HTMLElement): gsap.Context {
       topbar?.classList.remove('is-stuck');
       document.documentElement.style.removeProperty('--scroll-progress');
       scope.removeAttribute('data-motion-triggers');
+      for (const span of inkFillSpans) {
+        span.style.removeProperty('--f');
+      }
     });
   }, scope);
 }

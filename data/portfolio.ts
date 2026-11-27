@@ -168,7 +168,7 @@ export const portfolioContent: PortfolioContent = {
       accentCard: true,
     },
   ],
-  statementText: ['LEARN BY BUILDING', 'SHIP REAL WORK'],
+  statementText: ['CORE SYSTEMS', 'WEB SOFTWARE', 'APPLIED AI', 'LEARN & SHIP'],
   storyPanels: [
     {
       index: '1',
