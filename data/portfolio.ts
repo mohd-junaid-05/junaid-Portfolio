@@ -195,9 +195,9 @@ export const portfolioContent: PortfolioContent = {
       variant: 'deadline',
       heading: 'NEXUS Coding Club',
       body: {
-        value: 'Active contributor and workshop lead with NEXUS Coding Club.',
-        status: 'candidate',
-        note: 'Confirm official role title and dates.',
+        value: null,
+        status: 'tbd',
+        note: 'Confirm role, responsibilities, and dates before publication.',
       },
     },
     {
@@ -205,9 +205,9 @@ export const portfolioContent: PortfolioContent = {
       variant: 'now',
       heading: 'Workshops',
       body: {
-        value: 'Peer sessions covering Git/GitHub, Python, C programming, and AI.',
-        status: 'candidate',
-        note: 'Confirm dates and session scope.',
+        value: null,
+        status: 'tbd',
+        note: 'Confirm workshop topics, dates, audience, and responsibilities before publication.',
       },
     },
     {
@@ -253,11 +253,9 @@ export const portfolioContent: PortfolioContent = {
       title: 'NEXUS Coding Club',
       organization: 'SCET Hyderabad',
       period: { value: null, status: 'tbd', note: 'Confirm exact role title and dates.' },
-      kind: 'Leadership (Role TBD)',
-      highlights: [
-        'Club involvement and peer mentoring (details TBD).',
-      ],
-      tags: ['NEXUS', 'Community'],
+      kind: 'Role details pending confirmation',
+      highlights: [],
+      tags: ['NEXUS'],
       status: 'candidate',
     },
     {
@@ -265,13 +263,9 @@ export const portfolioContent: PortfolioContent = {
       title: 'Technical Workshops',
       organization: 'SCET / NEXUS',
       period: { value: null, status: 'tbd', note: 'Confirm workshop dates and responsibilities.' },
-      kind: 'Workshops',
-      highlights: [
-        'Git and GitHub workflow fundamentals (dates/role TBD).',
-        'Python and C programming sessions (dates/role TBD).',
-        'AI introductory workshop (dates/role TBD).',
-      ],
-      tags: ['Git/GitHub', 'Python', 'C', 'AI'],
+      kind: 'Workshop details pending confirmation',
+      highlights: [],
+      tags: [],
       status: 'candidate',
     },
     {

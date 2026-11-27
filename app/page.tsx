@@ -31,6 +31,11 @@ export default function HomePage() {
       <StoryShell />
       <ExperienceShell />
       <ReceiptsShell />
+      <TapesDivider
+        variant="paper-ink"
+        trackA={openingTapes.trackA}
+        trackB={openingTapes.trackB}
+      />
       <CapabilitiesShell />
       <ContactShell />
       <HydrationMarker />

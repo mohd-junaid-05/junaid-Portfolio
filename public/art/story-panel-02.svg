@@ -1,0 +1,44 @@
+<!-- Original illustration: Engineering Approach — abstract geometric on-ink panel (manga ink) -->
+<!-- Created for Mohd Junaid portfolio, Phase 08. No reference artwork used. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <rect width="800" height="600" fill="#0a0a0a"/>
+  <!-- Large concentric circles (focus / precision motif) -->
+  <circle cx="400" cy="300" r="280" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.08"/>
+  <circle cx="400" cy="300" r="220" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.1"/>
+  <circle cx="400" cy="300" r="160" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.14"/>
+  <circle cx="400" cy="300" r="100" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.2"/>
+  <circle cx="400" cy="300" r="50" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.3"/>
+  <circle cx="400" cy="300" r="12" fill="#ffffff" opacity="0.9"/>
+  <!-- Crosshair lines -->
+  <line x1="0" y1="300" x2="800" y2="300" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+  <line x1="400" y1="0" x2="400" y2="600" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+  <!-- Diagonal cross -->
+  <line x1="150" y1="50" x2="650" y2="550" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <line x1="650" y1="50" x2="150" y2="550" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <!-- Gear teeth (top — engineering symbol) -->
+  <rect x="388" y="10" width="24" height="30" rx="2" fill="#ffffff" opacity="0.6"/>
+  <rect x="388" y="560" width="24" height="30" rx="2" fill="#ffffff" opacity="0.6"/>
+  <rect x="10" y="288" width="30" height="24" rx="2" fill="#ffffff" opacity="0.6"/>
+  <rect x="760" y="288" width="30" height="24" rx="2" fill="#ffffff" opacity="0.6"/>
+  <!-- Measurement tick marks -->
+  <line x1="400" y1="140" x2="400" y2="155" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+  <line x1="400" y1="445" x2="400" y2="460" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+  <line x1="145" y1="300" x2="160" y2="300" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+  <line x1="640" y1="300" x2="655" y2="300" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+  <!-- Abstract grid dots (halftone) -->
+  <circle cx="600" cy="80" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="640" cy="80" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="680" cy="80" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="600" cy="110" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="640" cy="110" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="680" cy="110" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="120" cy="460" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="160" cy="460" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="200" cy="460" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="120" cy="490" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="160" cy="490" r="2" fill="#ffffff" opacity="0.2"/>
+  <circle cx="200" cy="490" r="2" fill="#ffffff" opacity="0.2"/>
+  <!-- Triangle marks -->
+  <polygon points="400,260 390,278 410,278" fill="#ffffff" opacity="0.5"/>
+  <polygon points="400,340 390,322 410,322" fill="#ffffff" opacity="0.5"/>
+</svg>

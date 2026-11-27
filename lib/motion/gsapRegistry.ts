@@ -227,26 +227,46 @@ export function setupScrollInfrastructure(scope: HTMLElement): gsap.Context {
     }
 
     if (fadeUpTargets.length > 0) {
-      ScrollTrigger.batch(fadeUpTargets, {
-        start: 'top 88%',
-        once: true,
-        onEnter: (batch) => {
-          batch.forEach((el) => el.classList.add('is-in'));
-          gsap.fromTo(
-            batch,
-            { y: MOTION_TOKENS.revealDistancePx, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: MOTION_TOKENS.f12,
-              ease: MOTION_TOKENS.easeSlam,
-              stagger: 0.06,
-              overwrite: 'auto',
-              clearProps: 'transform,opacity',
-            }
-          );
-        },
-      });
+      const revealBatch = (batch: Element[]) => {
+        batch.forEach((el) => el.classList.add('is-in'));
+        gsap.fromTo(
+          batch,
+          { y: MOTION_TOKENS.revealDistancePx, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: MOTION_TOKENS.f12,
+            ease: MOTION_TOKENS.easeSlam,
+            stagger: 0.06,
+            overwrite: 'auto',
+            clearProps: 'transform,opacity',
+          }
+        );
+      };
+
+      // Immediately reveal elements already at or above the fold (e.g. /#contact deep-link load)
+      const viewportThreshold = window.innerHeight * 0.95;
+      const alreadyVisible: HTMLElement[] = [];
+      const pendingBatch: HTMLElement[] = [];
+      for (const el of fadeUpTargets) {
+        if (el.getBoundingClientRect().top <= viewportThreshold) {
+          alreadyVisible.push(el);
+        } else {
+          pendingBatch.push(el);
+        }
+      }
+      if (alreadyVisible.length > 0) {
+        revealBatch(alreadyVisible);
+      }
+
+      if (pendingBatch.length > 0) {
+        ScrollTrigger.batch(pendingBatch, {
+          start: 'top 88%',
+          once: true,
+          onEnter: revealBatch,
+          onEnterBack: revealBatch,
+        });
+      }
     }
 
     scope.setAttribute('data-motion-triggers', String(ScrollTrigger.getAll().length));

@@ -1,43 +1,51 @@
+import Image from 'next/image';
+import { CapabilitiesList } from '@/components/ui/CapabilitiesList';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
-import { ContentStatus } from '@/components/ui/ContentStatus';
 import { portfolioContent } from '@/data/portfolio';
 
+/**
+ * CapabilitiesShell — RSC
+ *
+ * Section #07 — Core Capabilities
+ * Surface class: on-accent (--accent background, --on-accent foreground)
+ * Reference: Multiplied right aura art + 4 numbered capability rows + closing CTA
+ * Evidence: E-020
+ */
 export function CapabilitiesShell() {
   const { capabilities } = portfolioContent;
 
   return (
-    <section id="capabilities" aria-labelledby="capabilities-title" className="chapter on-accent">
+    <section
+      id="capabilities"
+      aria-labelledby="capabilities-title"
+      className="chapter on-accent services"
+    >
+      <div className="services__art" aria-hidden="true" data-parallax="-8">
+        <Image
+          src="/art/capabilities-aura.svg"
+          alt=""
+          width={900}
+          height={900}
+          sizes="(max-width: 899px) 120vw, min(58vw, 54rem)"
+        />
+      </div>
+
       <ChapterHeader
         number="07"
         kanji="第七章"
         chapterName="Capabilities"
-        titlePrefix="Core"
-        titleAccent="Capabilities"
-        intro="Technical capabilities framed around engineering practice and workshop leadership."
+        titlePrefix="Core Capabilities"
+        intro="Engineering skills and peer workshop practice, each backed by coursework, club sessions, or project builds."
         titleId="capabilities-title"
       />
 
-      <ol className="m-0 list-none border-t-[3px] border-ink p-0">
-        {capabilities.map((cap) => (
-          <li
-            key={cap.index}
-            className="grid gap-3 border-b-[3px] border-ink py-6 md:grid-cols-[4rem_1.25fr_1fr] md:items-center md:gap-8"
-          >
-            <span className="label">{cap.index}</span>
-            <h3 className="display m-0 text-[clamp(2.2rem,6vw,5rem)] leading-[0.95]">
-              {cap.title}
-            </h3>
-            <div>
-              <p className="m-0 text-[1.05rem] leading-[1.5]">{cap.description}</p>
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <span className="tag">Proof</span>
-                <span className="label">{cap.proofLabels.join(' · ')}</span>
-                <ContentStatus status={cap.status} />
-              </div>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <CapabilitiesList items={capabilities} />
+
+      <div className="svc__cta" data-reveal="up">
+        <a className="btn" href="#contact">
+          Get in touch <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </section>
   );
 }

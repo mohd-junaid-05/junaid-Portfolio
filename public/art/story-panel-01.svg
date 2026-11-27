@@ -1,0 +1,78 @@
+<!-- Original illustration: SCET Hyderabad — geometric cityscape (manga ink style) -->
+<!-- Created for Mohd Junaid portfolio, Phase 08. No reference artwork used. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <rect width="800" height="600" fill="#ffffff"/>
+  <!-- City skyline silhouette — geometric angular buildings -->
+  <rect x="0" y="380" width="800" height="220" fill="#0a0a0a"/>
+  <!-- Buildings — left cluster -->
+  <rect x="20" y="260" width="60" height="120" fill="#0a0a0a"/>
+  <rect x="30" y="230" width="40" height="30" fill="#0a0a0a"/>
+  <rect x="90" y="300" width="50" height="80" fill="#0a0a0a"/>
+  <rect x="100" y="280" width="30" height="20" fill="#0a0a0a"/>
+  <!-- Antenna -->
+  <rect x="47" y="200" width="4" height="30" fill="#0a0a0a"/>
+  <!-- Center tall building (SCET main) -->
+  <rect x="160" y="180" width="90" height="200" fill="#0a0a0a"/>
+  <rect x="170" y="160" width="70" height="20" fill="#0a0a0a"/>
+  <rect x="200" y="140" width="10" height="20" fill="#0a0a0a"/>
+  <!-- Windows in center building (white cutouts) -->
+  <rect x="175" y="195" width="12" height="16" fill="#ffffff"/>
+  <rect x="197" y="195" width="12" height="16" fill="#ffffff"/>
+  <rect x="219" y="195" width="12" height="16" fill="#ffffff"/>
+  <rect x="175" y="225" width="12" height="16" fill="#ffffff"/>
+  <rect x="197" y="225" width="12" height="16" fill="#ffffff"/>
+  <rect x="219" y="225" width="12" height="16" fill="#ffffff"/>
+  <rect x="175" y="255" width="12" height="16" fill="#ffffff"/>
+  <rect x="197" y="255" width="12" height="16" fill="#ffffff"/>
+  <rect x="219" y="255" width="12" height="16" fill="#ffffff"/>
+  <rect x="175" y="285" width="12" height="16" fill="#ffffff"/>
+  <rect x="197" y="285" width="12" height="16" fill="#ffffff"/>
+  <rect x="219" y="285" width="12" height="16" fill="#ffffff"/>
+  <!-- Right cluster buildings -->
+  <rect x="270" y="300" width="70" height="80" fill="#0a0a0a"/>
+  <rect x="280" y="270" width="50" height="30" fill="#0a0a0a"/>
+  <rect x="285" y="255" width="40" height="15" fill="#0a0a0a"/>
+  <rect x="350" y="310" width="55" height="70" fill="#0a0a0a"/>
+  <rect x="360" y="290" width="35" height="20" fill="#0a0a0a"/>
+  <!-- Far right buildings -->
+  <rect x="420" y="250" width="80" height="130" fill="#0a0a0a"/>
+  <rect x="430" y="225" width="60" height="25" fill="#0a0a0a"/>
+  <!-- Windows far right building -->
+  <rect x="435" y="260" width="10" height="14" fill="#ffffff"/>
+  <rect x="453" y="260" width="10" height="14" fill="#ffffff"/>
+  <rect x="471" y="260" width="10" height="14" fill="#ffffff"/>
+  <rect x="435" y="285" width="10" height="14" fill="#ffffff"/>
+  <rect x="453" y="285" width="10" height="14" fill="#ffffff"/>
+  <rect x="471" y="285" width="10" height="14" fill="#ffffff"/>
+  <rect x="435" y="310" width="10" height="14" fill="#ffffff"/>
+  <rect x="453" y="310" width="10" height="14" fill="#ffffff"/>
+  <rect x="471" y="310" width="10" height="14" fill="#ffffff"/>
+  <!-- More buildings -->
+  <rect x="520" y="290" width="60" height="90" fill="#0a0a0a"/>
+  <rect x="530" y="265" width="40" height="25" fill="#0a0a0a"/>
+  <rect x="540" y="250" width="20" height="15" fill="#0a0a0a"/>
+  <rect x="595" y="320" width="45" height="60" fill="#0a0a0a"/>
+  <rect x="650" y="270" width="70" height="110" fill="#0a0a0a"/>
+  <rect x="660" y="250" width="50" height="20" fill="#0a0a0a"/>
+  <rect x="730" y="310" width="50" height="70" fill="#0a0a0a"/>
+  <rect x="740" y="290" width="30" height="20" fill="#0a0a0a"/>
+  <!-- Road/ground hatching -->
+  <line x1="0" y1="382" x2="800" y2="382" stroke="#ffffff" stroke-width="2"/>
+  <!-- Halftone dot field sky (top-left) -->
+  <circle cx="40" cy="40" r="3" fill="#0a0a0a" opacity="0.15"/>
+  <circle cx="80" cy="40" r="3" fill="#0a0a0a" opacity="0.15"/>
+  <circle cx="120" cy="40" r="3" fill="#0a0a0a" opacity="0.15"/>
+  <circle cx="40" cy="80" r="3" fill="#0a0a0a" opacity="0.15"/>
+  <circle cx="80" cy="80" r="3" fill="#0a0a0a" opacity="0.15"/>
+  <circle cx="120" cy="80" r="3" fill="#0a0a0a" opacity="0.15"/>
+  <circle cx="60" cy="120" r="2.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="100" cy="120" r="2.5" fill="#0a0a0a" opacity="0.12"/>
+  <!-- Speed lines from top right -->
+  <line x1="800" y1="0" x2="400" y2="300" stroke="#0a0a0a" stroke-width="0.5" opacity="0.08"/>
+  <line x1="800" y1="30" x2="420" y2="310" stroke="#0a0a0a" stroke-width="0.5" opacity="0.08"/>
+  <line x1="800" y1="60" x2="440" y2="310" stroke="#0a0a0a" stroke-width="0.5" opacity="0.08"/>
+  <line x1="800" y1="90" x2="460" y2="310" stroke="#0a0a0a" stroke-width="0.5" opacity="0.08"/>
+  <line x1="800" y1="120" x2="480" y2="310" stroke="#0a0a0a" stroke-width="0.5" opacity="0.08"/>
+  <!-- Panel border lines (manga gutter effect) -->
+  <rect x="1" y="1" width="798" height="598" fill="none" stroke="#0a0a0a" stroke-width="3"/>
+</svg>

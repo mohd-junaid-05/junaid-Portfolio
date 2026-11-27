@@ -1,0 +1,82 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 900 900"
+  width="900"
+  height="900"
+  fill="none"
+>
+  <rect width="900" height="900" fill="#ffffff" />
+  <g stroke="#0a0a0a" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Concentric kinetic manga aura arcs -->
+    <path
+      d="M780 120 C560 40, 290 120, 180 340 C90 520, 150 740, 340 840"
+      stroke-width="10"
+      opacity="0.92"
+    />
+    <path
+      d="M740 165 C555 95, 330 165, 235 355 C160 505, 210 695, 375 785"
+      stroke-width="6"
+      opacity="0.78"
+    />
+    <path
+      d="M820 210 C620 150, 390 220, 295 405 C225 540, 280 710, 445 790"
+      stroke-width="4"
+      opacity="0.65"
+    />
+
+    <!-- Ink-sweep ribbon strokes -->
+    <path
+      d="M640 70 C470 110, 300 240, 210 430 C165 525, 165 620, 200 715 C215 620, 255 520, 330 430 C430 310, 560 225, 705 185 Z"
+      fill="#0a0a0a"
+      stroke="none"
+      opacity="0.88"
+    />
+    <path
+      d="M790 265 C690 320, 610 410, 565 520 C530 605, 535 700, 580 785 C500 710, 465 605, 490 495 C520 365, 625 265, 790 265 Z"
+      fill="#0a0a0a"
+      stroke="none"
+      opacity="0.82"
+    />
+
+    <!-- Radial speedlines -->
+    <line x1="560" y1="360" x2="140" y2="180" stroke-width="3" opacity="0.55" />
+    <line x1="560" y1="380" x2="95" y2="310" stroke-width="2.5" opacity="0.48" />
+    <line x1="560" y1="405" x2="85" y2="465" stroke-width="3.5" opacity="0.6" />
+    <line x1="575" y1="435" x2="145" y2="635" stroke-width="2.5" opacity="0.45" />
+    <line x1="600" y1="460" x2="275" y2="795" stroke-width="3" opacity="0.52" />
+    <line x1="640" y1="470" x2="465" y2="855" stroke-width="2" opacity="0.4" />
+    <line x1="685" y1="455" x2="675" y2="850" stroke-width="2.5" opacity="0.45" />
+    <line x1="720" y1="415" x2="865" y2="735" stroke-width="3" opacity="0.5" />
+
+    <!-- Abstract standing silhouette emblem (original geometric-manga figure) -->
+    <path
+      d="M575 235 C555 235, 540 250, 540 272 C540 294, 555 310, 575 310 C595 310, 610 294, 610 272 C610 250, 595 235, 575 235 Z"
+      fill="#0a0a0a"
+      stroke="none"
+    />
+    <path
+      d="M525 322 L625 322 L650 475 L615 485 L605 635 L645 815 L575 815 L560 645 L540 815 L475 815 L515 620 L495 475 Z"
+      fill="#0a0a0a"
+      stroke="none"
+    />
+    <!-- Flowing coat/cloak ink tail -->
+    <path
+      d="M525 322 L435 555 L345 775 L465 735 L535 520 Z"
+      fill="#0a0a0a"
+      stroke="none"
+      opacity="0.92"
+    />
+    <path
+      d="M625 322 L735 510 L820 710 L690 660 L620 480 Z"
+      fill="#0a0a0a"
+      stroke="none"
+      opacity="0.9"
+    />
+
+    <!-- Ink flecks -->
+    <polygon points="240,220 258,214 252,232" fill="#0a0a0a" stroke="none" />
+    <polygon points="160,550 182,542 172,566" fill="#0a0a0a" stroke="none" />
+    <polygon points="410,140 426,134 420,150" fill="#0a0a0a" stroke="none" />
+    <polygon points="790,580 814,572 804,596" fill="#0a0a0a" stroke="none" />
+  </g>
+</svg>

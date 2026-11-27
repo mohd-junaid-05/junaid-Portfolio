@@ -1,0 +1,53 @@
+<!-- Original illustration: NEXUS Coding Club — geometric desk/terminal hatching (manga ink) -->
+<!-- Created for Mohd Junaid portfolio, Phase 08. No reference artwork used. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <rect width="800" height="600" fill="#ffffff"/>
+  <!-- Monitor outline (centered, stylized) -->
+  <rect x="200" y="100" width="400" height="280" rx="4" fill="#0a0a0a"/>
+  <rect x="215" y="115" width="370" height="250" rx="2" fill="#ffffff"/>
+  <!-- Monitor stand -->
+  <rect x="358" y="380" width="84" height="20" fill="#0a0a0a"/>
+  <rect x="310" y="400" width="180" height="12" rx="2" fill="#0a0a0a"/>
+  <!-- Terminal screen content (white bg, black text lines) -->
+  <!-- Cursor blink block -->
+  <rect x="225" y="125" width="8" height="16" fill="#0a0a0a" opacity="0.9"/>
+  <!-- Code lines (simulated) -->
+  <rect x="225" y="150" width="90" height="6" rx="1" fill="#0a0a0a" opacity="0.7"/>
+  <rect x="225" y="166" width="140" height="6" rx="1" fill="#0a0a0a" opacity="0.5"/>
+  <rect x="245" y="182" width="110" height="6" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="245" y="198" width="85" height="6" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="225" y="214" width="60" height="6" rx="1" fill="#0a0a0a" opacity="0.7"/>
+  <rect x="225" y="230" width="170" height="6" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="245" y="246" width="120" height="6" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="225" y="262" width="80" height="6" rx="1" fill="#0a0a0a" opacity="0.7"/>
+  <rect x="225" y="278" width="195" height="6" rx="1" fill="#0a0a0a" opacity="0.3"/>
+  <rect x="225" y="294" width="150" height="6" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="225" y="310" width="70" height="6" rx="1" fill="#0a0a0a" opacity="0.7"/>
+  <rect x="245" y="326" width="130" height="6" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="245" y="342" width="95" height="6" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <!-- Hatching pattern (bottom area - speed lines) -->
+  <line x1="0" y1="450" x2="800" y2="450" stroke="#0a0a0a" stroke-width="1.5"/>
+  <line x1="0" y1="470" x2="800" y2="470" stroke="#0a0a0a" stroke-width="0.8" opacity="0.5"/>
+  <line x1="0" y1="488" x2="800" y2="488" stroke="#0a0a0a" stroke-width="0.8" opacity="0.5"/>
+  <line x1="0" y1="505" x2="800" y2="505" stroke="#0a0a0a" stroke-width="0.8" opacity="0.5"/>
+  <line x1="0" y1="520" x2="800" y2="520" stroke="#0a0a0a" stroke-width="0.8" opacity="0.5"/>
+  <line x1="0" y1="535" x2="800" y2="535" stroke="#0a0a0a" stroke-width="1.5" opacity="0.7"/>
+  <line x1="0" y1="550" x2="800" y2="550" stroke="#0a0a0a" stroke-width="0.8" opacity="0.5"/>
+  <line x1="0" y1="565" x2="800" y2="565" stroke="#0a0a0a" stroke-width="0.8" opacity="0.5"/>
+  <line x1="0" y1="580" x2="800" y2="580" stroke="#0a0a0a" stroke-width="0.8" opacity="0.5"/>
+  <!-- Keyboard silhouette (bottom left) -->
+  <rect x="20" y="430" width="160" height="12" rx="2" fill="#0a0a0a" opacity="0.5"/>
+  <rect x="20" y="446" width="160" height="10" rx="2" fill="#0a0a0a" opacity="0.4"/>
+  <!-- Halftone dots (top right corner) -->
+  <circle cx="700" cy="30" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="740" cy="30" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="780" cy="30" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="700" cy="65" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="740" cy="65" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="780" cy="65" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="700" cy="100" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="740" cy="100" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <circle cx="780" cy="100" r="3.5" fill="#0a0a0a" opacity="0.12"/>
+  <!-- Panel frame -->
+  <rect x="1" y="1" width="798" height="598" fill="none" stroke="#0a0a0a" stroke-width="3"/>
+</svg>

@@ -1,0 +1,69 @@
+<!-- Original illustration: Workshops — night terminal / learning motif (manga ink) -->
+<!-- Created for Mohd Junaid portfolio, Phase 08. No reference artwork used. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <rect width="800" height="600" fill="#ffffff"/>
+  <!-- Abstract figures in workshop arrangement (top-down silhouettes) -->
+  <!-- Table (horizontal bar center) -->
+  <rect x="100" y="280" width="600" height="16" rx="2" fill="#0a0a0a"/>
+  <!-- Figures seated (simple geometric people) -->
+  <!-- Figure 1 (left) -->
+  <circle cx="170" cy="230" r="22" fill="#0a0a0a"/>
+  <rect x="150" y="255" width="40" height="28" rx="2" fill="#0a0a0a"/>
+  <!-- Figure 2 -->
+  <circle cx="290" cy="230" r="22" fill="#0a0a0a"/>
+  <rect x="270" y="255" width="40" height="28" rx="2" fill="#0a0a0a"/>
+  <!-- Figure 3 -->
+  <circle cx="400" cy="230" r="22" fill="#0a0a0a"/>
+  <rect x="380" y="255" width="40" height="28" rx="2" fill="#0a0a0a"/>
+  <!-- Figure 4 -->
+  <circle cx="510" cy="230" r="22" fill="#0a0a0a"/>
+  <rect x="490" y="255" width="40" height="28" rx="2" fill="#0a0a0a"/>
+  <!-- Figure 5 -->
+  <circle cx="630" cy="230" r="22" fill="#0a0a0a"/>
+  <rect x="610" cy="255" width="40" height="28" rx="2" fill="#0a0a0a"/>
+  <!-- Presentation board (top) -->
+  <rect x="250" y="40" width="300" height="160" rx="2" fill="#0a0a0a"/>
+  <rect x="262" y="52" width="276" height="136" rx="1" fill="#ffffff"/>
+  <!-- Presentation content (code lines on whiteboard) -->
+  <rect x="275" y="68" width="100" height="8" rx="1" fill="#0a0a0a" opacity="0.8"/>
+  <rect x="275" y="88" width="150" height="6" rx="1" fill="#0a0a0a" opacity="0.5"/>
+  <rect x="290" y="104" width="120" height="6" rx="1" fill="#0a0a0a" opacity="0.5"/>
+  <rect x="290" y="120" width="90" height="6" rx="1" fill="#0a0a0a" opacity="0.5"/>
+  <rect x="275" y="136" width="80" height="6" rx="1" fill="#0a0a0a" opacity="0.8"/>
+  <rect x="275" y="156" width="130" height="6" rx="1" fill="#0a0a0a" opacity="0.5"/>
+  <rect x="290" y="172" width="95" height="6" rx="1" fill="#0a0a0a" opacity="0.5"/>
+  <!-- Board legs -->
+  <rect x="358" y="200" width="6" height="40" fill="#0a0a0a" opacity="0.7"/>
+  <rect x="436" y="200" width="6" height="40" fill="#0a0a0a" opacity="0.7"/>
+  <!-- Items on table (laptops, books — simplified) -->
+  <rect x="145" y="262" width="40" height="18" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="265" y="262" width="40" height="18" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="375" y="262" width="50" height="18" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="485" y="262" width="40" height="18" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <rect x="605" y="262" width="40" height="18" rx="1" fill="#0a0a0a" opacity="0.4"/>
+  <!-- Bottom floor line -->
+  <line x1="0" y1="380" x2="800" y2="380" stroke="#0a0a0a" stroke-width="2"/>
+  <!-- Action lines (learning energy) -->
+  <line x1="400" y1="200" x2="50" y2="430" stroke="#0a0a0a" stroke-width="0.5" opacity="0.06"/>
+  <line x1="400" y1="200" x2="200" y2="450" stroke="#0a0a0a" stroke-width="0.5" opacity="0.06"/>
+  <line x1="400" y1="200" x2="600" y2="450" stroke="#0a0a0a" stroke-width="0.5" opacity="0.06"/>
+  <line x1="400" y1="200" x2="750" y2="430" stroke="#0a0a0a" stroke-width="0.5" opacity="0.06"/>
+  <!-- Halftone background bottom-right -->
+  <circle cx="650" cy="440" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="680" cy="440" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="710" cy="440" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="740" cy="440" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="770" cy="440" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="650" cy="468" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="680" cy="468" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="710" cy="468" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="740" cy="468" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="770" cy="468" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <!-- Dots left column -->
+  <circle cx="30" cy="420" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="60" cy="420" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="30" cy="448" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <circle cx="60" cy="448" r="3" fill="#0a0a0a" opacity="0.1"/>
+  <!-- Panel frame -->
+  <rect x="1" y="1" width="798" height="598" fill="none" stroke="#0a0a0a" stroke-width="3"/>
+</svg>
