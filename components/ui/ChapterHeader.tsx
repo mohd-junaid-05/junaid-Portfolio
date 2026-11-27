@@ -23,10 +23,14 @@ export function ChapterHeader({
 }: ChapterHeaderProps) {
   return (
     <header className="chead">
-      <span className="chead__ghost display outline-text" aria-hidden="true">
+      <span
+        className="chead__ghost display outline-text"
+        data-parallax="-14"
+        aria-hidden="true"
+      >
         {number}
       </span>
-      <p className="chead__label label">
+      <p className="chead__label label" data-reveal="up">
         <span className="jp" aria-hidden="true">
           {kanji}
         </span>
@@ -34,7 +38,7 @@ export function ChapterHeader({
           {'//'} Chapter {number} &mdash; {chapterName}
         </span>
       </p>
-      <h2 id={titleId} className="chead__title display">
+      <h2 id={titleId} className="chead__title display" data-reveal="up">
         {titlePrefix}
         {titleAccent ? (
           <>
@@ -43,7 +47,11 @@ export function ChapterHeader({
           </>
         ) : null}
       </h2>
-      {intro ? <p className="chead__intro">{intro}</p> : null}
+      {intro ? (
+        <p className="chead__intro" data-reveal="up">
+          {intro}
+        </p>
+      ) : null}
     </header>
   );
 }

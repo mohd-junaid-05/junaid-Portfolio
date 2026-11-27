@@ -1,3 +1,4 @@
+import { MotionToggle } from '@/components/ui/MotionToggle';
 import { portfolioContent } from '@/data/portfolio';
 import { CHAPTERS, PRIMARY_NAV_CHAPTERS } from '@/lib/navigation';
 
@@ -28,6 +29,10 @@ export function SiteHeader() {
         ))}
       </nav>
 
+      <div className="topbar__tools">
+        <MotionToggle />
+      </div>
+
       <details className="mobile-nav">
         <summary className="mobile-nav__summary">
           <span className="inline-block h-[0.55rem] w-[1.4rem] border-y-2 border-current" aria-hidden="true" />
@@ -49,6 +54,9 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
+          <div className="pt-4">
+            <MotionToggle />
+          </div>
         </nav>
       </details>
     </header>

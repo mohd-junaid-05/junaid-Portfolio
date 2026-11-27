@@ -6,6 +6,7 @@ import {
   JetBrains_Mono,
   Shippori_Mincho,
 } from 'next/font/google';
+import { MotionProvider } from '@/components/motion/MotionProvider';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import './globals.css';
@@ -65,14 +66,16 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" data-theme="blood" data-motion="on" className={fontVariables}>
       <body>
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <SiteHeader />
-        <main id="main" tabIndex={-1}>
-          {children}
-        </main>
-        <SiteFooter />
+        <MotionProvider>
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <SiteHeader />
+          <main id="main" tabIndex={-1}>
+            {children}
+          </main>
+          <SiteFooter />
+        </MotionProvider>
       </body>
     </html>
   );
